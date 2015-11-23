@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
 from __future__ import print_function
+from setuptools import setup, find_packages
 
 
 install_requires = [
@@ -9,7 +9,8 @@ install_requires = [
     'pytz',
     'requests',
     'simplejson',
-    # 'astropy',
+    'astropy',
+    'six',
 ]
 
 test_requires = [

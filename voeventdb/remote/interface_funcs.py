@@ -1,3 +1,4 @@
+import urllib
 import requests
 import requests.exceptions
 import voeventdb.remote.endpoints
@@ -31,9 +32,33 @@ def count_matching(filters=None,
     return r.json()[rkeys.result]
 
 
+def get_synopsis(ivorn,
+                 host=None):
+    if host is None:
+        host = voeventdb.remote.default_host
+    ep_url = host + apiv0.synopsis
+    url = ep_url + urllib.quote_plus(ivorn)
+    with helpful_requests_error_log():
+        r = requests.get(url)
+    r.raise_for_status()
+    return r.json()[rkeys.result]
+
+
+def get_xml(ivorn,
+            host=None):
+    if host is None:
+        host = voeventdb.remote.default_host
+    ep_url = host + apiv0.xml_view
+    url = ep_url + urllib.quote_plus(ivorn)
+    with helpful_requests_error_log():
+        r = requests.get(url)
+    r.raise_for_status()
+    return r.text.encode('utf-8')
+
+
 def list_ivorns(filters=None,
-                host=None,
                 pagesize=None,
+                host=None,
                 ):
     if host is None:
         host = voeventdb.remote.default_host
@@ -46,9 +71,9 @@ def list_ivorns(filters=None,
     params[pkeys.limit] = n_matched
 
     results = get_paginated(url=host + apiv0.ivorn,
-                  params=params,
-                  n_total=n_matched,
-                  pagesize=pagesize,
-                  )
+                            params=params,
+                            n_total=n_matched,
+                            pagesize=pagesize,
+                            )
 
     return results
