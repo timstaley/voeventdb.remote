@@ -32,18 +32,3 @@ def helpful_requests_error_log():
     finally:
         pass
 
-def get_paginated(url, params, n_total, pagesize):
-    offset = 0
-    results = []
-    localpars = params.copy()
-    localpars[pkeys.limit] = pagesize
-    while offset < n_total:
-        localpars[pkeys.offset] = offset
-        with helpful_requests_error_log():
-            r = requests.get(url,
-                             params=localpars
-                             )
-        r.raise_for_status()
-        results.extend(r.json()[rkeys.result])
-        offset += pagesize
-    return results

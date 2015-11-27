@@ -1,9 +1,11 @@
 from __future__ import absolute_import
-from voeventdb.remote.interface_funcs import (
-    count_matching,
-    get_synopsis,
-    get_xml,
-    list_ivorns,
+from voeventdb.remote.convenience import (
+    count,
+    ivorn,
+    ivorn_cited_count,
+    ivorn_ref_count,
+    synopsis,
+    xml,
 )
 default_host = 'http://voeventdb.4pisky.org'
 
