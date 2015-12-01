@@ -14,7 +14,7 @@ install_requires = [
 ]
 
 test_requires = [
-    'voeventdb[test]',
+    'voeventdb.server[test]',
 ]
 
 extras_require = {
