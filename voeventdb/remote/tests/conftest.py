@@ -9,6 +9,9 @@ from voeventdb.server.tests.fixtures.connection import (
 from voeventdb.server.restapi.app import app
 import requests
 
+import logging
+logger = logging.getLogger('vdbr-tests')
+
 @pytest.yield_fixture
 def mock_requests(fixture_db_session):
     # print
@@ -37,6 +40,7 @@ def mock_requests(fixture_db_session):
         prepped = req.prepare()
         full_url = prepped.url
         # print("PATH URL", prepped.path_url)
+        logger.debug("Fetching {}".format(prepped.path_url))
         flask_response = client.get(prepped.path_url)
         req_resp = requests.Response()
         req_resp._content = flask_response.data
