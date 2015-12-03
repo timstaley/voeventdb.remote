@@ -1,9 +1,8 @@
 import urllib
 import requests
 import requests.exceptions
-import voeventdb.remote.endpoints
-from voeventdb.remote.endpoints import apiv0
-from voeventdb.remote.keys import (
+
+from voeventdb.remote.apiv0 import (
     PaginationKeys,
     ResultKeys,
     OrderValues,
@@ -75,6 +74,7 @@ def get_paginated(url, params, n_to_fetch, pagesize):
     return results
 
 def get_list_data(list_endpoint,
+                  count_endpoint,
                   filters,
                   order,
                   n_max,
@@ -91,7 +91,7 @@ def get_list_data(list_endpoint,
     if filters:
         params.update(filters)
 
-    n_matched = get_summary_data(endpoint=apiv0.count,
+    n_matched = get_summary_data(endpoint=count_endpoint,
                                 filters=filters,
                                 host=host)
     if n_max:

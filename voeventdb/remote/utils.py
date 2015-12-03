@@ -4,7 +4,7 @@ import collections
 import requests
 import logging
 logger = logging.getLogger(__name__)
-from voeventdb.remote.keys import (
+from voeventdb.remote.apiv0.definitions import (
     ResultKeys as rkeys,
     PaginationKeys as pkeys
 )
