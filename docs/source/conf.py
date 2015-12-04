@@ -11,10 +11,10 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
+from __future__ import print_function
 import sys
 import os
-import shlex
+import subprocess
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
@@ -93,6 +93,8 @@ todo_include_todos = False
 # a list of builtin themes.
 # html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
+# html_theme = "nature"
+
 html_show_sphinx = False
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
@@ -109,17 +111,22 @@ intersphinx_mapping = {
     'voeventdb':('http://voeventdb.readthedocs.org/en/latest/', None)
 }
 
-from subprocess import check_call as sh
 def convert_nb(nbpath, output_folder):
+    from subprocess import check_call as sh
     basename = os.path.basename(nbpath)
     basename_stem = basename.rsplit('.',1)[0]
     # Execute the notebook
-    sh(["jupyter", "nbconvert", "--to", "notebook",
-        "--execute", "--inplace", nbpath])
+    # sh(["jupyter", "nbconvert", "--to", "notebook",
+    #     "--execute", "--inplace", nbpath])
 
     # Convert to .rst for Sphinx
-    sh(["jupyter", "nbconvert", "--to", "rst", nbpath,
-        "--output", str(os.path.join(output_folder, basename_stem+".rst")),
+    sh(["jupyter", "nbconvert",
+        "--to", "html",
+        "--execute",
+        # '--template', 'basic',
+        '--template', 'custom_nbconvert_template',
+        nbpath,
+        "--output", str(os.path.join(output_folder, basename_stem+".html")),
         ])
 
     # Clear notebook output
@@ -128,7 +135,7 @@ def convert_nb(nbpath, output_folder):
 
 import glob
 notebooks = glob.glob('notebooks/*.ipynb')
-print notebooks
+print("Notebooks found",notebooks)
 
 for nb in notebooks:
     convert_nb(nb, output_folder='tutorial')
