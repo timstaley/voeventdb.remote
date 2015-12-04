@@ -3,7 +3,7 @@
 A Python client-library for running remote queries against the [voeventdb][]
 [REST interface](http://voeventdb.4pisky.org). 
 
-You can use this library to quickly and easily retrieve information
+You can use this library to easily retrieve information
 about transient astronomical events, for which alerts or follow-up data 
 have been sent via the [VOEvent][] network.
 

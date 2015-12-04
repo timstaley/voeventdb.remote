@@ -18,7 +18,7 @@ import shlex
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
-rootdir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+rootdir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("Rootdir", rootdir)
 sys.path.append(rootdir)
 
@@ -108,3 +108,27 @@ intersphinx_mapping = {
     # 'https://docs.python.org/': None,
     'voeventdb':('http://voeventdb.readthedocs.org/en/latest/', None)
 }
+
+from subprocess import check_call as sh
+def convert_nb(nbpath, output_folder):
+    basename = os.path.basename(nbpath)
+    basename_stem = basename.rsplit('.',1)[0]
+    # Execute the notebook
+    sh(["jupyter", "nbconvert", "--to", "notebook",
+        "--execute", "--inplace", nbpath])
+
+    # Convert to .rst for Sphinx
+    sh(["jupyter", "nbconvert", "--to", "rst", nbpath,
+        "--output", str(os.path.join(output_folder, basename_stem+".rst")),
+        ])
+
+    # Clear notebook output
+    sh(["jupyter", "nbconvert", "--to", "notebook", "--inplace",
+        "--ClearOutputPreprocessor.enabled=True", nbpath])
+
+import glob
+notebooks = glob.glob('notebooks/*.ipynb')
+print notebooks
+
+for nb in notebooks:
+    convert_nb(nb, output_folder='tutorial')

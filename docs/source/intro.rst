@@ -7,13 +7,13 @@ voeventdb.remote is a Python library for performing remote queries against
 a voeventdb_ REST interface, like the one hosted by the `4 Pi Sky`_
 research group at http://voeventdb.4pisky.org.
 
-You can use this library to quickly and easily retrieve information
+You can use this library to easily retrieve information
 about transient astronomical events, if that information was sent via the public
 VOEvent_ network.
 
 For a fuller introduction, see the main
 :ref:`voeventdb introduction <voeventdb:introduction>`.
-Alternatively, jump right in to the tutorial to learn by example.
+Alternatively, jump right in to the :ref:`tutorial <tutorial>` to learn by example.
 
 
 .. _voeventdb: http://voeventdb.readthedocs.org/

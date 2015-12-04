@@ -1,2 +1,2 @@
 #!/bin/sh
-PYTHONPATH=$(pwd -P):$PYTHONPATH jupyter notebook notebooks
+PYTHONPATH=$(pwd -P):$PYTHONPATH jupyter notebook docs/source/notebooks
