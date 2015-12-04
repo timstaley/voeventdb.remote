@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 from setuptools import setup, find_packages
+import versioneer
 
 
 install_requires = [
@@ -27,7 +28,8 @@ print("FOUND PACKAGES: ", packages)
 
 setup(
     name="voeventdb.remote",
-    version="0.1a0",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description="Client-library for remotely querying the voeventdb REST API.",
     author="Tim Staley",
     author_email="timstaley337@gmail.com",
