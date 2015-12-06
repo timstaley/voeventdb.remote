@@ -1,3 +1,9 @@
+"""
+Classes enumerated things specific to apiv0.
+
+These are intended to be useful to the end-user in building queries.
+"""
+
 class Endpoints:
     root = "/apiv0/"
     authored_month_count = "/apiv0/authored_month_count"
@@ -54,15 +60,5 @@ class OrderValues:
     ivorn = 'ivorn'
     ivorn_desc = 'ivorn_desc'
 
-class PaginationKeys:
-    limit = 'limit'
-    offset = 'offset'
-    order = 'order'
 
-class ResultKeys:
-    endpoint = 'endpoint'
-    limit = 'limit'
-    querystring = 'querystring'
-    result = 'result'
-    url = 'url'
 

@@ -2,20 +2,37 @@ import urllib
 import requests
 import requests.exceptions
 
-from voeventdb.remote.apiv0 import (
+import voeventdb.remote
+from voeventdb.remote.definitions import (
     PaginationKeys,
     ResultKeys,
-    OrderValues,
 )
 from voeventdb.remote.utils import (
     helpful_requests_error_log,
 )
-import voeventdb.remote
+
+import datetime
 
 import logging
 
 logger = logging.getLogger(__name__)
 
+
+def format_filters(filters):
+    """
+    Perform any necessary autoconversion of filter-values to strings.
+
+    For example, we isoformat any datetimes.
+    """
+    if not filters:
+        return filters
+    formatted = {}
+    for k,v in filters.items():
+        if isinstance(v, datetime.datetime):
+            formatted[k] = v.isoformat()
+        else:
+            formatted[k]=v
+    return formatted
 
 def get_summary_response(endpoint,
                          filters,
@@ -23,7 +40,7 @@ def get_summary_response(endpoint,
                          ):
     if host is None:
         host = voeventdb.remote.default_host
-    params = filters
+    params = format_filters(filters)
     with helpful_requests_error_log():
         r = requests.get(host + endpoint,
                          params=params
@@ -85,11 +102,9 @@ def get_list_data(list_endpoint,
         host = voeventdb.remote.default_host
     if pagesize is None:
         pagesize = voeventdb.remote.default_pagesize
-    if order is None:
-        order = OrderValues.id
     params = {}
     if filters:
-        params.update(filters)
+        params.update(format_filters(filters))
 
     n_matched = get_summary_data(endpoint=count_endpoint,
                                 filters=filters,

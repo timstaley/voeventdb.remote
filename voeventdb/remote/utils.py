@@ -1,13 +1,7 @@
 from contextlib import contextmanager
-from six import string_types
-import collections
 import requests
 import logging
 logger = logging.getLogger(__name__)
-from voeventdb.remote.apiv0.definitions import (
-    ResultKeys as rkeys,
-    PaginationKeys as pkeys
-)
 
 @contextmanager
 def helpful_requests_error_log():

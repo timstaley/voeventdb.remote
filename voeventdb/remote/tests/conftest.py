@@ -44,6 +44,7 @@ def mock_requests(fixture_db_session):
         flask_response = client.get(prepped.path_url)
         req_resp = requests.Response()
         req_resp._content = flask_response.data
+        req_resp.status_code = flask_response.status_code
         return req_resp
 
     original_get = requests.get

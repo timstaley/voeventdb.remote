@@ -1,7 +1,7 @@
 """
 Helper classes for providing convenience parsing of returned JSON content.
 """
-from astropy.coordinates import SkyCoord
+from astropy.coordinates import SkyCoord, Angle
 from astropy.time import Time
 import iso8601
 import logging
@@ -11,21 +11,35 @@ logging.getLogger('iso8601').setLevel(logging.INFO)
 import pprint
 
 
-class CoordsWithTimestamp(object):
-    def __init__(self, sky_position, time):
-        self.coords = sky_position
-        self.timestamp = time
+class SkyEvent(object):
+    """
+    Represents the most basic attributes of an observed event on sky.
+
+    Namely:
+     - position
+     - position error
+     - timestamp of event
+    """
+    def __init__(self,
+                 sky_position,
+                 sky_position_error,
+                 event_timestamp):
+        self.position = sky_position
+        self.position_error = sky_position_error
+        self.timestamp = event_timestamp
     def __repr__(self):
-        return str(self.coords)+' @ '+self.timestamp.isoformat()
+        return (str(self.position)
+                +' +/- ' + self.position_error.to_string(decimal=True)
+               +' @ ' + self.timestamp.isoformat())
 
 class Synopsis(object):
     def __init__(self, synopsis_dict, api_version_string='apiv0'):
         self._synopsis_dict = synopsis_dict.copy()
 
-        self.coords_with_timestamp = [self._parse_coords_dict(d)
-                        for d in synopsis_dict['coords']]
+        self.sky_events = [self._parse_coords_dict(d)
+                           for d in synopsis_dict['coords']]
 
-        self.coords = [e.coords for e in self.coords_with_timestamp]
+        self.coords = [e.position for e in self.sky_events]
 
         self.references = self._synopsis_dict['refs']
 
@@ -61,5 +75,8 @@ class Synopsis(object):
     def _parse_coords_dict(coords_dict):
         d = coords_dict
         posn = SkyCoord(d['ra'], d['dec'], unit='deg')
+        posn_error = Angle(d['error'], unit='deg')
         time = iso8601.parse_date(d['time'])
-        return CoordsWithTimestamp(posn,time)
+        return SkyEvent(sky_position=posn,
+                        sky_position_error=posn_error,
+                        event_timestamp=time)
