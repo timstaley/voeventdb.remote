@@ -26,7 +26,7 @@ API version 0 (``apiv0``)
     :undoc-members:
     :member-order: bysource
 
-.. automodule:: voeventdb.remote.apiv0
+.. automodule:: voeventdb.remote.apiv0.convenience_funcs
     :members:
     :undoc-members:
     :member-order: bysource

@@ -130,8 +130,12 @@ def convert_nb(nbpath, output_folder):
         ])
 
     # Clear notebook output
-    sh(["jupyter", "nbconvert", "--to", "notebook", "--inplace",
-        "--ClearOutputPreprocessor.enabled=True", nbpath])
+    sh(["jupyter", "nbconvert", "--to", "notebook",
+        # "--inplace",
+        "--ClearOutputPreprocessor.enabled=True",
+        nbpath,
+        "--output", nbpath,
+        ])
 
 import glob
 notebooks = glob.glob('notebooks/*.ipynb')
