@@ -141,5 +141,6 @@ import glob
 notebooks = glob.glob('notebooks/*.ipynb')
 print("Notebooks found",notebooks)
 
-for nb in notebooks:
-    convert_nb(nb, output_folder='tutorial')
+if not os.environ.get("SKIPNB",None):
+    for nb in notebooks:
+        convert_nb(nb, output_folder='tutorial')

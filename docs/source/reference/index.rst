@@ -8,7 +8,7 @@ API Reference
 Package default variables
 --------------------------
 
-.. automodule:: voeventdb.remote.apiv0
+.. automodule:: voeventdb.remote
     :members:
     :undoc-members:
     :member-order: bysource
