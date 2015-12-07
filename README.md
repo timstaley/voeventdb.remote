@@ -1,4 +1,4 @@
-# voeventdb.remote
+# voeventdb.remote [![Build Status](https://travis-ci.org/timstaley/voeventdbremote.svg?branch=master)](https://travis-ci.org/timstaley/voeventdbremote)
 
 A Python client-library for running remote queries against the [voeventdb][]
 [REST interface](http://voeventdb.4pisky.org). 
