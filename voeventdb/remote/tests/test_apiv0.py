@@ -1,6 +1,7 @@
 from __future__ import print_function
 import pytest
 from voeventdb.server.tests.resources import swift_bat_grb_655721
+import voeventdb.remote as vr
 import voeventdb.remote.apiv0 as apiv0
 import voeventparse as vp
 import requests
@@ -18,6 +19,24 @@ class TestFunctionCalls():
         all_ivorns_rev_order = apiv0.ivorn(order=apiv0.OrderValues.id_desc)
         assert all_ivorns == dbinf.inserted_ivorns
         assert all_ivorns_rev_order == all_ivorns[::-1]
+
+    def test_list_pagination(self, simple_populated_db,
+                            reset_globals_to_defaults):
+        """
+        Sanity check that pagination params passed correctly to wrapper func.
+
+        (NB wrapper tested independently elsewhere).
+        """
+        vr.default_list_n_max = 30
+        vr.default_pagesize = 5
+        dbinf = simple_populated_db
+        count = apiv0.count()
+        assert count > vr.default_list_n_max
+        ivorns = apiv0.ivorn()
+        assert len(ivorns) == vr.default_list_n_max
+        #This time we override the max:
+        ivorns = apiv0.ivorn(n_max=0)
+        assert len(ivorns) == dbinf.n_inserts
 
     def test_xml_retrieval(self, simple_populated_db):
         dbinf = simple_populated_db

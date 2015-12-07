@@ -1,9 +1,20 @@
 
 .. _reference:
 
-API Reference (apiv0)
-=====================
+API Reference
+==============
 
+
+Package default variables
+--------------------------
+
+.. automodule:: voeventdb.remote.apiv0
+    :members:
+    :undoc-members:
+    :member-order: bysource
+
+API version 0 (``apiv0``)
+-------------------------
 
 .. autoclass:: voeventdb.remote.apiv0.FilterKeys
     :members:

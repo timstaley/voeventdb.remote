@@ -92,11 +92,11 @@ def get_paginated(url, params, n_to_fetch, pagesize):
 
 def get_list_data(list_endpoint,
                   count_endpoint,
-                  filters,
-                  order,
-                  n_max,
-                  pagesize,
-                  host,
+                  filters=None,
+                  order=None,
+                  n_max=None,
+                  pagesize=None,
+                  host=None,
                   ):
     if host is None:
         host = voeventdb.remote.default_host
@@ -109,6 +109,8 @@ def get_list_data(list_endpoint,
     n_matched = get_summary_data(endpoint=count_endpoint,
                                 filters=filters,
                                 host=host)
+    if n_max is None:
+        n_max = voeventdb.remote.default_list_n_max
     if n_max:
         n_to_fetch = min(n_matched, n_max)
     else:

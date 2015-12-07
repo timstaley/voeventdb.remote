@@ -7,10 +7,12 @@ from voeventdb.server.tests.fixtures.connection import (
     simple_populated_db
 )
 from voeventdb.server.restapi.app import app
+import voeventdb.remote as vr
 import requests
-
 import logging
+
 logger = logging.getLogger('vdbr-tests')
+
 
 @pytest.yield_fixture
 def mock_requests(fixture_db_session):
@@ -53,3 +55,14 @@ def mock_requests(fixture_db_session):
     app_context.pop()
     del app_context
     requests.get = original_get
+
+
+@pytest.yield_fixture
+def reset_globals_to_defaults():
+    host = vr.default_host
+    list_max = vr.default_list_n_max
+    pagesize = vr.default_pagesize
+    yield
+    vr.default_host = host
+    vr.default_list_n_max = list_max
+    vr.default_pagesize = pagesize

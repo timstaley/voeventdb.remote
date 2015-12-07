@@ -22,6 +22,31 @@ class TestGetSummaryWraps():
                                           host=vr.default_host)
         assert count == dbinf.n_inserts
 
+    def test_list_wrapper_pagination(self, simple_populated_db,
+                                     reset_globals_to_defaults):
+        vr.default_list_n_max = 30
+        vr.default_pagesize = 5
+        dbinf = simple_populated_db
+        count = wrappers.get_summary_data(endpoint=Endpoints.count,
+                                          filters=None,
+                                          host=vr.default_host)
+        assert count > vr.default_list_n_max
+        ivorns = wrappers.get_list_data(
+            list_endpoint=Endpoints.ivorn,
+            count_endpoint=Endpoints.count,
+                               )
+        assert len(ivorns) == vr.default_list_n_max
+
+        #This time we override the max:
+        ivorns = wrappers.get_list_data(
+            list_endpoint=Endpoints.ivorn,
+            count_endpoint=Endpoints.count,
+            n_max=0,
+            )
+        assert len(ivorns) == dbinf.n_inserts
+
+
+
     def test_filter_by_datetime(self, simple_populated_db):
         """
         Check default requests behaviour when passed datetime-params.
