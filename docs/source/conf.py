@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -107,8 +108,9 @@ nitpicky = True
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    # 'https://docs.python.org/': None,
-    'voeventdb':('http://voeventdb.readthedocs.org/en/latest/', None)
+    'https://docs.python.org/': None,
+    'voeventdb':('http://voeventdb.readthedocs.org/en/latest/', None),
+    'astropy': ('http://astropy.readthedocs.org/en/stable/', None)
 }
 
 def convert_nb(nbpath, output_folder):

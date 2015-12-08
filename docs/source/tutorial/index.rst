@@ -15,4 +15,5 @@ online or work through them interactively by downloading them from the
    :maxdepth: 2
 
    tutorial1
+   tutorial2
 

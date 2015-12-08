@@ -13,6 +13,7 @@ Package default variables
     :undoc-members:
     :member-order: bysource
 
+
 API version 0 (``apiv0``)
 -------------------------
 
@@ -29,4 +30,11 @@ API version 0 (``apiv0``)
 .. automodule:: voeventdb.remote.apiv0.convenience_funcs
     :members:
     :undoc-members:
+    :member-order: bysource
+
+
+Helper classes
+---------------
+.. automodule:: voeventdb.remote.helpers
+    :members:
     :member-order: bysource
