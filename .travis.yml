@@ -1,6 +1,11 @@
 language: python
-python:
-- '2.7'
+matrix:
+  include:
+    - python: "2.7"
+      env: TOXENV=py27
+    - python: "2.7"
+      env: TOXENV=docs
+
 virtualenv:
   system_site_packages: true
 
@@ -13,20 +18,24 @@ addons:
   apt:
     packages:
     - postgresql-server-dev-9.3
+    - pandoc
 
 services:
 - postgresql
 
 before_install:
+  - git clone --recursive https://github.com/timstaley/voeventdb servercode
+  - cd servercode
   - sudo make -C external/q3c install
   - psql -c "\du" -U postgres | cat
   - psql -l | cat
   - psql -c "create database $USER;" -U postgres | cat
+  - pip install --upgrade pip virtualenv
 install:
   - cd ${TRAVIS_BUILD_DIR}
   - pip install tox
   - pip freeze
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - tox
+  - tox -v
 
