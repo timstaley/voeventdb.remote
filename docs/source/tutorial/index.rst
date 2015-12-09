@@ -16,4 +16,5 @@ online or work through them interactively by downloading them from the
 
    tutorial1
    tutorial2
+   tutorial3
 
