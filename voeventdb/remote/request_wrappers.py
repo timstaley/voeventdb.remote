@@ -10,12 +10,45 @@ from voeventdb.remote.definitions import (
 from voeventdb.remote.utils import (
     helpful_requests_error_log,
 )
-
+from astropy.coordinates import SkyCoord, Angle
+from six import string_types
 import datetime
-
+import json
 import logging
 
 logger = logging.getLogger(__name__)
+
+def format_conesearch_params(input):
+    """
+    Validates and formats parameters for the cone-search filter.
+    """
+    if not input:
+        raise ValueError(
+            "Cannot format {} to valid cone-search params".format(input()))
+
+    try:
+        if isinstance(input, string_types):
+            # Assume preformatted (ra,dec,err) json-list:
+            ra,dec,err = json.loads(input)
+            posn = SkyCoord(ra,dec, unit='deg')
+            posn_error = Angle(err, unit='deg')
+        elif len(input)==2:
+            # Assume (Skycoord, Angle) tuple:
+            posn = SkyCoord(input[0])
+            posn_error = Angle(input[1])
+        elif len(input)==3:
+            # Assume simple (ra,dec,err) tuple:
+            # We still parse via SkyCoord, this provides validation.
+            posn = SkyCoord(input[0],input[1], unit='deg')
+            posn_error = Angle(input[2], unit='deg')
+        else:
+            raise ValueError
+    except:
+        logger.error(
+            "Cannot format {} to valid SkyCoord / Angle "
+            "for cone-search ".format(input()))
+        raise
+    return str([posn.ra.deg, posn.dec.deg, posn_error.deg])
 
 
 def format_filters(filters):
@@ -32,6 +65,8 @@ def format_filters(filters):
             formatted[k] = v.isoformat()
         else:
             formatted[k]=v
+    if 'cone' in filters:
+        formatted['cone'] = format_conesearch_params(filters['cone'])
     return formatted
 
 def get_summary_response(endpoint,
