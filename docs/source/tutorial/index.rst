@@ -4,8 +4,9 @@ Tutorial
 =========
 
 The tutorials take the form of Jupyter_ notebooks; you can either read them
-online or work through them interactively by downloading them from the
-`notebooks folder`_ of the Github repository.
+online or download them to work with interactively. The notebook files can
+be found in the `notebooks folder`_ of the source repository, or downloaded
+using the links on each tutorial page.
 
 
 .. _Jupyter: http://jupyter.org/
