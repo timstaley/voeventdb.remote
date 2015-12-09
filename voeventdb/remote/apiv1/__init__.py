@@ -1,8 +1,8 @@
 from __future__ import absolute_import
-from voeventdb.remote.apiv0.definitions import (
+from voeventdb.remote.apiv1.definitions import (
     Endpoints, FilterKeys, OrderValues
 )
-from voeventdb.remote.apiv0.convenience_funcs import (
+from voeventdb.remote.apiv1.convenience_funcs import (
     authored_month_count,
     count,
     ivorn,

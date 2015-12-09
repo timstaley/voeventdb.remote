@@ -14,20 +14,20 @@ Package default variables
     :member-order: bysource
 
 
-API version 0 (``apiv0``)
+API version 1 (``apiv1``)
 -------------------------
 
-.. autoclass:: voeventdb.remote.apiv0.FilterKeys
+.. autoclass:: voeventdb.remote.apiv1.FilterKeys
     :members:
     :undoc-members:
     :member-order: bysource
 
-.. autoclass:: voeventdb.remote.apiv0.OrderValues
+.. autoclass:: voeventdb.remote.apiv1.OrderValues
     :members:
     :undoc-members:
     :member-order: bysource
 
-.. automodule:: voeventdb.remote.apiv0.convenience_funcs
+.. automodule:: voeventdb.remote.apiv1.convenience_funcs
     :members:
     :undoc-members:
     :member-order: bysource

@@ -78,7 +78,7 @@ class Synopsis(object):
             present in the ``Citations`` section of the VOEvent packet.
 
     """
-    def __init__(self, synopsis_dict, api_version_string='apiv0'):
+    def __init__(self, synopsis_dict, api_version_string='apiv1'):
 
 
         voevent_dict = synopsis_dict['voevent']

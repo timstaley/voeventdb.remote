@@ -4,7 +4,7 @@ import voeventdb.remote as vr
 import voeventdb.remote.request_wrappers as wrappers
 
 from voeventdb.remote.definitions import ResultKeys
-from voeventdb.remote.apiv0.definitions import Endpoints, FilterKeys
+from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
 # import requests
 
 from voeventdb.server.tests.fixtures.connection import simple_populated_db

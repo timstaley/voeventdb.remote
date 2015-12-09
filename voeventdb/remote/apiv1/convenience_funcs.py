@@ -1,5 +1,5 @@
 from voeventdb.remote.definitions import ResultKeys
-from voeventdb.remote.apiv0.definitions import Endpoints
+from voeventdb.remote.apiv1.definitions import Endpoints
 from voeventdb.remote.request_wrappers import (
     get_summary_data, get_list_data, get_detail_response
 )

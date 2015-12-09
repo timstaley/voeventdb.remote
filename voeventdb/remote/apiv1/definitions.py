@@ -1,21 +1,21 @@
 """
-Classes enumerated things specific to apiv0.
+Classes enumerated things specific to apiv1.
 
 These are intended to be useful to the end-user in building queries.
 """
 
 class Endpoints:
-    root = "/apiv0/"
-    authored_month_count = "/apiv0/authored_month_count"
-    count = "/apiv0/count"
-    ivorn = "/apiv0/ivorn"
-    ivorn_cited_count = "/apiv0/ivorn_cited_count"
-    ivorn_ref_count = "/apiv0/ivorn_ref_count"
-    role_count = "/apiv0/role_count"
-    stream_count = "/apiv0/stream_count"
-    stream_role_count = "/apiv0/stream_role_count"
-    synopsis = "/apiv0/synopsis/"
-    xml_view = "/apiv0/xml/"
+    root = "/apiv1/"
+    authored_month_count = "/apiv1/authored_month_count"
+    count = "/apiv1/count"
+    ivorn = "/apiv1/ivorn"
+    ivorn_cited_count = "/apiv1/ivorn_cited_count"
+    ivorn_ref_count = "/apiv1/ivorn_ref_count"
+    role_count = "/apiv1/role_count"
+    stream_count = "/apiv1/stream_count"
+    stream_role_count = "/apiv1/stream_role_count"
+    synopsis = "/apiv1/synopsis/"
+    xml_view = "/apiv1/xml/"
 
 class FilterKeys:
     """
@@ -29,7 +29,7 @@ class FilterKeys:
         }
 
     For definitions of the various filters, and examples of valid
-    values, see the :ref:`voeventdb query-filters <voeventdb:apiv0_filters>` page.
+    values, see the :ref:`voeventdb query-filters <voeventdb:apiv1_filters>` page.
 
     """
     authored_since = 'authored_since'
