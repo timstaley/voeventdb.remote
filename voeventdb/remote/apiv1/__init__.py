@@ -4,6 +4,7 @@ from voeventdb.remote.apiv1.definitions import (
 )
 from voeventdb.remote.apiv1.convenience_funcs import (
     authored_month_count,
+    citation_network_map,
     count,
     ivorn,
     ivorn_cited_count,

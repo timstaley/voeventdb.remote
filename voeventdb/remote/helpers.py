@@ -6,9 +6,12 @@ from astropy.time import Time
 import iso8601
 import logging
 from copy import deepcopy
+from collections import defaultdict
 
 logging.getLogger('iso8601').setLevel(logging.INFO)
 import pprint
+
+logger = logging.getLogger(__name__)
 
 
 class SkyEvent(object):
@@ -29,16 +32,19 @@ class SkyEvent(object):
             Timestamp for the reported event (UTC timezone).
 
     """
+
     def __init__(self, skyevent_dict):
         d = skyevent_dict
-        self.position= SkyCoord(d['ra'], d['dec'], unit='deg')
+        self.position = SkyCoord(d['ra'], d['dec'], unit='deg')
         self.position_error = Angle(d['error'], unit='deg')
-        self.timestamp = iso8601.parse_date(d['time'])
+        self.timestamp = None
+        if d.get('time'):
+            self.timestamp = iso8601.parse_date(d['time'])
 
     def __repr__(self):
         return (str(self.position)
-                +' +/- ' + self.position_error.to_string(decimal=True)
-               +' @ ' + self.timestamp.isoformat())
+                + ' +/- ' + self.position_error.to_string(decimal=True)
+                + ' @ ' + self.timestamp.isoformat())
 
     @staticmethod
     def _parse_coords_dict(coords_dict):
@@ -49,6 +55,7 @@ class SkyEvent(object):
         return SkyEvent(sky_position=posn,
                         sky_position_error=posn_error,
                         event_timestamp=time)
+
 
 class Synopsis(object):
     """
@@ -78,8 +85,8 @@ class Synopsis(object):
             present in the ``Citations`` section of the VOEvent packet.
 
     """
-    def __init__(self, synopsis_dict, api_version_string='apiv1'):
 
+    def __init__(self, synopsis_dict, api_version_string='apiv1'):
 
         voevent_dict = synopsis_dict['voevent']
 
@@ -107,8 +114,6 @@ class Synopsis(object):
 
         self.references = self._synopsis_dict['refs']
 
-
-
     def __repr__(self):
         # Can be pasted back in to recreate the object
         return "Synopsis({})".format(self._synopsis_dict)
@@ -117,7 +122,7 @@ class Synopsis(object):
         # Bit hacky, probably overkill:
         display_vars = {k: v for k, v in vars(self).items()
                         if not k.startswith('_')}
-        display_vars=deepcopy(display_vars)
+        display_vars = deepcopy(display_vars)
         display_vars.pop('coords')
         for k, v in display_vars.items():
             if hasattr(v, 'isoformat'):
@@ -127,3 +132,76 @@ class Synopsis(object):
         return pp.pformat(display_vars)
 
 
+def _map_citations(ivorn,
+                   fetch_refs_func,
+                   fetch_citations_func,
+                   cite_map=None,
+                   previously_mapped=None,
+                   prev_recursion_level=None,
+                   max_recursion=None,
+                   ):
+    """
+    Perform a depth first search on the citation-network.
+
+    (API agnostic version, should be wrapped for convenience)
+
+    Stop at max_recursion links from initial node / IVORN.
+
+    Returns:
+        citation_map (dict): A dictionary containing all the VOEvents in this
+            network, to max_recursion level specified.
+            The dictionary maps an 'origin' IVORN to its citing packets,
+            i.e.::
+
+                { origin_ivorn : {citing_ivorn1, ..., citing_ivornN} }
+
+            We could have inverted the relationship (map packet_ivorn->included references)
+            but since the typical behaviour is for many packets to cite one origin
+            packet, this usually results in a more compact representation.
+
+    """
+
+    if prev_recursion_level is None:
+        current_recursion_level = 0
+    else:
+        current_recursion_level = prev_recursion_level + 1
+    logger.debug('Fetching for {}, at recursion level {}'.format(
+        ivorn, current_recursion_level))
+
+    if cite_map is None:
+        cite_map = defaultdict(set)
+    if previously_mapped is None:
+        previously_mapped = set()
+    logger.debug('{} packets mapped'.format(len(previously_mapped)))
+    ref_ivorns = fetch_refs_func(ivorn)
+    for ri in ref_ivorns:
+        # Add a 'citation' entry to the cite_map of the origin-ivorn being referenced.
+        cite_map[ri].add(ivorn)
+    citing_ivorns = fetch_citations_func(ivorn)
+    for ci in citing_ivorns:
+        cite_map[ivorn].add(ci)
+    previously_mapped.add(ivorn)
+    if not max_recursion or (current_recursion_level < max_recursion):
+        for ri in ref_ivorns:
+            if ri not in previously_mapped:
+                cite_map.update(_map_citations(
+                    ivorn=ri,
+                    fetch_refs_func=fetch_refs_func,
+                    fetch_citations_func=fetch_citations_func,
+                    cite_map=cite_map,
+                    previously_mapped=previously_mapped,
+                    prev_recursion_level=current_recursion_level,
+                    max_recursion=max_recursion,
+                ))
+        for ci in citing_ivorns:
+            if ci not in previously_mapped:
+                cite_map.update(_map_citations(
+                    ivorn=ci,
+                    fetch_refs_func=fetch_refs_func,
+                    fetch_citations_func=fetch_citations_func,
+                    cite_map=cite_map,
+                    previously_mapped=previously_mapped,
+                    prev_recursion_level=current_recursion_level,
+                    max_recursion=max_recursion,
+                ))
+    return cite_map

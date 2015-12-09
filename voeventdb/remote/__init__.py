@@ -9,7 +9,6 @@ __version__ = __versiondict__['version']
 del get_versions
 
 import voeventdb.remote.definitions
-import voeventdb.remote.helpers
 
 default_host = 'http://voeventdb.4pisky.org'
 """

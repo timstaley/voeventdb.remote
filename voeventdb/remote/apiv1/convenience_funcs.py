@@ -1,9 +1,10 @@
 from voeventdb.remote.definitions import ResultKeys
-from voeventdb.remote.apiv1.definitions import Endpoints
+from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
 from voeventdb.remote.request_wrappers import (
     get_summary_data, get_list_data, get_detail_response
 )
 import logging
+from voeventdb.remote.helpers import _map_citations
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +15,20 @@ def authored_month_count(filters=None,
     return get_summary_data(endpoint=Endpoints.authored_month_count,
                             filters=filters,
                             host=host)
+
+def _fetch_refs(ivorn):
+    return [ r['ref_ivorn'] for r in synopsis(ivorn)['refs']]
+
+def _fetch_cites(ref_ivorn):
+    return ivorn({FilterKeys.ref_exact : ref_ivorn})
+
+def citation_network_map(ivorn, max_recursion_levels=5):
+    return _map_citations(
+        ivorn=ivorn,
+        fetch_refs_func=_fetch_refs,
+        fetch_citations_func=_fetch_cites,
+        max_recursion=max_recursion_levels
+    )
 
 
 def count(filters=None,

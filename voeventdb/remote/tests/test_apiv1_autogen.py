@@ -9,11 +9,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 apiv1_funcs_dict = {k: v for k, v in vars(apiv1).items()
-                    if inspect.isfunction(v)}
+                    if inspect.isfunction(v)
+                    and not k.startswith('_')}
 
 apiv1_queryfuncs_dict = apiv1_funcs_dict.copy()
 apiv1_queryfuncs_dict.pop('synopsis')
 apiv1_queryfuncs_dict.pop('xml')
+apiv1_queryfuncs_dict.pop('citation_network_map')
 
 
 @pytest.mark.usefixtures('mock_requests')
