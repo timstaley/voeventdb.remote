@@ -1,3 +1,5 @@
 sphinx
 jupyter
 voevent-parse
+matplotlib
+networkx

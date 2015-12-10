@@ -23,12 +23,13 @@ def _fetch_cites(ref_ivorn):
     return ivorn({FilterKeys.ref_exact : ref_ivorn})
 
 def citation_network_map(ivorn, max_recursion_levels=5):
-    return _map_citations(
+    defaultdict_map =  _map_citations(
         ivorn=ivorn,
         fetch_refs_func=_fetch_refs,
         fetch_citations_func=_fetch_cites,
         max_recursion=max_recursion_levels
     )
+    return dict(defaultdict_map)
 
 
 def count(filters=None,

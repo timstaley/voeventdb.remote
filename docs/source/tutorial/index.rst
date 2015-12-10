@@ -18,4 +18,5 @@ using the links on each tutorial page.
    tutorial1
    tutorial2
    tutorial3
+   tutorial4
 
