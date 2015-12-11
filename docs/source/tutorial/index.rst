@@ -20,3 +20,4 @@ using the links on each tutorial page.
    tutorial3
    tutorial4
    tutorial5
+   demo
