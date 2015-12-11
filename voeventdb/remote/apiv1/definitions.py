@@ -59,11 +59,11 @@ class OrderValues:
 
     """
     author_datetime = 'author_datetime'
-    author_datetime_desc = 'author_datetime_desc'
+    author_datetime_desc = '-author_datetime'
     id = 'id'
-    id_desc = 'id_desc'
+    id_desc = '-id'
     ivorn = 'ivorn'
-    ivorn_desc = 'ivorn_desc'
+    ivorn_desc = '-ivorn'
 
 
 
