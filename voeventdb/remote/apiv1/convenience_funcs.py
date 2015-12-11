@@ -9,18 +9,18 @@ from voeventdb.remote.helpers import _map_citations
 logger = logging.getLogger(__name__)
 
 
-def authored_month_count(filters=None,
-                         host=None,
-                         ):
-    return get_summary_data(endpoint=Endpoints.authored_month_count,
+def map_authored_month_count(filters=None,
+                             host=None,
+                             ):
+    return get_summary_data(endpoint=Endpoints.map_authored_month_count,
                             filters=filters,
                             host=host)
 
 def _fetch_refs(ivorn):
-    return [ r['ref_ivorn'] for r in synopsis(ivorn)['refs']]
+    return [r['ref_ivorn'] for r in packet_synopsis(ivorn)['refs']]
 
 def _fetch_cites(ref_ivorn):
-    return ivorn({FilterKeys.ref_exact : ref_ivorn})
+    return list_ivorn({FilterKeys.ref_exact : ref_ivorn})
 
 def citation_network_map(ivorn, max_recursion_levels=5):
     defaultdict_map =  _map_citations(
@@ -40,13 +40,13 @@ def count(filters=None,
                             host=host)
 
 
-def ivorn(filters=None,
-          order=None,
-          pagesize=None,
-          n_max=None,
-          host=None,
-          ):
-    return get_list_data(list_endpoint=Endpoints.ivorn,
+def list_ivorn(filters=None,
+               order=None,
+               pagesize=None,
+               n_max=None,
+               host=None,
+               ):
+    return get_list_data(list_endpoint=Endpoints.list_ivorn,
                          count_endpoint=Endpoints.count,
                          filters=filters,
                          order=order,
@@ -56,13 +56,13 @@ def ivorn(filters=None,
                          )
 
 
-def ivorn_cited_count(filters=None,
+def list_ivorn_ncites(filters=None,
                       order=None,
                       pagesize=None,
                       n_max=None,
                       host=None,
                       ):
-    return get_list_data(list_endpoint=Endpoints.ivorn_cited_count,
+    return get_list_data(list_endpoint=Endpoints.list_ivorn_ncites,
                          count_endpoint=Endpoints.count,
                          filters=filters,
                          order=order,
@@ -72,13 +72,13 @@ def ivorn_cited_count(filters=None,
                          )
 
 
-def ivorn_ref_count(filters=None,
-                    order=None,
-                    pagesize=None,
-                    n_max=None,
-                    host=None,
-                    ):
-    return get_list_data(list_endpoint=Endpoints.ivorn_ref_count,
+def list_ivorn_nrefs(filters=None,
+                     order=None,
+                     pagesize=None,
+                     n_max=None,
+                     host=None,
+                     ):
+    return get_list_data(list_endpoint=Endpoints.list_ivorn_nrefs,
                          count_endpoint=Endpoints.count,
                          filters=filters,
                          order=order,
@@ -88,41 +88,41 @@ def ivorn_ref_count(filters=None,
                          )
 
 
-def role_count(filters=None,
-               host=None,
-               ):
-    return get_summary_data(endpoint=Endpoints.role_count,
+def map_role_count(filters=None,
+                   host=None,
+                   ):
+    return get_summary_data(endpoint=Endpoints.map_role_count,
                             filters=filters,
                             host=host)
 
 
-def stream_count(filters=None,
-                 host=None,
-                 ):
-    return get_summary_data(endpoint=Endpoints.stream_count,
+def map_stream_count(filters=None,
+                     host=None,
+                     ):
+    return get_summary_data(endpoint=Endpoints.map_stream_count,
                             filters=filters,
                             host=host)
 
 
-def stream_role_count(filters=None,
-                      host=None,
-                      ):
-    return get_summary_data(endpoint=Endpoints.stream_role_count,
+def map_stream_role_count(filters=None,
+                          host=None,
+                          ):
+    return get_summary_data(endpoint=Endpoints.map_stream_role_count,
                             filters=filters,
                             host=host)
 
 
-def synopsis(ivorn,
-             host=None):
-    r = get_detail_response(endpoint=Endpoints.synopsis,
+def packet_synopsis(ivorn,
+                    host=None):
+    r = get_detail_response(endpoint=Endpoints.packet_synopsis,
                             ivorn=ivorn,
                             host=host)
     return r.json()[ResultKeys.result]
 
 
-def xml(ivorn,
-        host=None):
-    r = get_detail_response(endpoint=Endpoints.xml_view,
+def packet_xml(ivorn,
+               host=None):
+    r = get_detail_response(endpoint=Endpoints.packet_xml,
                             ivorn=ivorn,
                             host=host)
     return r.text.encode('utf-8')

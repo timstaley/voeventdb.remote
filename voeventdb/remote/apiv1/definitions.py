@@ -5,17 +5,22 @@ These are intended to be useful to the end-user in building queries.
 """
 
 class Endpoints:
-    root = "/apiv1/"
-    authored_month_count = "/apiv1/authored_month_count"
-    count = "/apiv1/count"
-    ivorn = "/apiv1/ivorn"
-    ivorn_cited_count = "/apiv1/ivorn_cited_count"
-    ivorn_ref_count = "/apiv1/ivorn_ref_count"
-    role_count = "/apiv1/role_count"
-    stream_count = "/apiv1/stream_count"
-    stream_role_count = "/apiv1/stream_role_count"
-    synopsis = "/apiv1/synopsis/"
-    xml_view = "/apiv1/xml/"
+    ## Regex from server inspection output:
+    ## ^'(.*)': (.*').* -> $1 = $2
+    ## Then:
+    ## ([\w]*)/(.*) -> $1_$2
+    root = '/apiv1/'
+    count = '/apiv1/count'
+    list_ivorn = '/apiv1/list/ivorn'
+    list_ivorn_ncites = '/apiv1/list/ivorn_ncites'
+    list_ivorn_nrefs = '/apiv1/list/ivorn_nrefs'
+    map_authored_month_count = '/apiv1/map/authored_month_count'
+    map_role_count = '/apiv1/map/role_count'
+    map_stream_count = '/apiv1/map/stream_count'
+    map_stream_role_count = '/apiv1/map/stream_role_count'
+    packet_synopsis = '/apiv1/packet/synopsis/'
+    packet_xml = '/apiv1/packet/xml/'
+
 
 class FilterKeys:
     """
@@ -39,7 +44,7 @@ class FilterKeys:
     coord = 'coord'
     ivorn_contains = 'ivorn_contains'
     ivorn_prefix = 'ivorn_prefix'
-    ref = 'ref'
+    ref_any = 'ref_any'
     ref_contains = 'ref_contains'
     ref_exact = 'ref_exact'
     role = 'role'

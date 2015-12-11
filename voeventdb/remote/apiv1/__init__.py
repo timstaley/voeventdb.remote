@@ -3,16 +3,16 @@ from voeventdb.remote.apiv1.definitions import (
     Endpoints, FilterKeys, OrderValues
 )
 from voeventdb.remote.apiv1.convenience_funcs import (
-    authored_month_count,
+    map_authored_month_count,
     citation_network_map,
     count,
-    ivorn,
-    ivorn_cited_count,
-    ivorn_ref_count,
-    role_count,
-    stream_count,
-    stream_role_count,
-    synopsis,
-    xml,
+    list_ivorn,
+    list_ivorn_ncites,
+    list_ivorn_nrefs,
+    map_role_count,
+    map_stream_count,
+    map_stream_role_count,
+    packet_synopsis,
+    packet_xml,
 )
 

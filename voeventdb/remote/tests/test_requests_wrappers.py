@@ -32,14 +32,14 @@ class TestGetSummaryWraps():
                                           host=vr.default_host)
         assert count > vr.default_list_n_max
         ivorns = wrappers.get_list_data(
-            list_endpoint=Endpoints.ivorn,
+            list_endpoint=Endpoints.list_ivorn,
             count_endpoint=Endpoints.count,
         )
         assert len(ivorns) == vr.default_list_n_max
 
         # This time we override the max:
         ivorns = wrappers.get_list_data(
-            list_endpoint=Endpoints.ivorn,
+            list_endpoint=Endpoints.list_ivorn,
             count_endpoint=Endpoints.count,
             n_max=0,
         )
