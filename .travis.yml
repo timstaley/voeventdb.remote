@@ -42,5 +42,5 @@ install:
   - pip freeze
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - tox -v
+  - tox -vv
 

@@ -3,4 +3,3 @@ jupyter
 voevent-parse
 matplotlib
 networkx
-pandas
