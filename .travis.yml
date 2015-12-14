@@ -1,5 +1,4 @@
 language: python
-cache: pip
 
 matrix:
   include:
@@ -29,6 +28,8 @@ services:
 - postgresql
 
 before_install:
+    # Pre-cache long-builds before we go into tox, avoids 'no-stdout' timeouts.
+  - pip install lxml numpy
   - git clone --recursive https://github.com/timstaley/voeventdb servercode
   - cd servercode/external/q3c
   - pg_config --version
@@ -44,5 +45,6 @@ install:
   - pip freeze
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - tox -vv
+  - tox --showconfig
+  - tox -v
 
