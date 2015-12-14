@@ -21,3 +21,19 @@ using the links on each tutorial page.
    tutorial4
    tutorial5
    demo
+
+
+.. note:: Optional dependencies:
+
+   For trying out the basic functionality in the tutorials, all you need to
+   install is the `voeventdb.remote` library itself (and optionally,
+   the Jupyter_ notebook dependency, if you are running the code from the notebooks
+   rather than pasting it in at the command line).
+   However, there are a few sections where
+   we make use of other libraries for generating plots, etc. If you want to
+   run those cells, you can ensure you have all the required libraries by
+   installing the list found in
+   :download:`docs/requirements.txt <../../requirements.txt>`, i.e.
+
+   .. literalinclude:: ../../requirements.txt
+
