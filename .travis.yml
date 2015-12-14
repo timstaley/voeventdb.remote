@@ -10,8 +10,11 @@ virtualenv:
   system_site_packages: true
 
 sudo: required
+dist: trusty
 
-addons:
+env:
+  global:
+    - PG_CONFIG=/usr/lib/postgresql/9.3/bin/pg_config
 
 addons:
   postgresql: "9.3"
@@ -25,8 +28,10 @@ services:
 
 before_install:
   - git clone --recursive https://github.com/timstaley/voeventdb servercode
-  - cd servercode
-  - sudo make -C external/q3c install
+  - cd servercode/external/q3c
+  - pg_config --version
+  - make
+  - sudo make install
   - psql -c "\du" -U postgres | cat
   - psql -l | cat
   - psql -c "create database $USER;" -U postgres | cat
