@@ -42,6 +42,8 @@ class FilterKeys:
     cited = 'cited'
     cone = 'cone'
     coord = 'coord'
+    dec_greater_than = 'dec_gt'
+    dec_less_than = 'dec_lt'
     ivorn_contains = 'ivorn_contains'
     ivorn_prefix = 'ivorn_prefix'
     ref_any = 'ref_any'
