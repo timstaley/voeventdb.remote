@@ -1,8 +1,8 @@
-Tutorial 1
-=============
+Tutorial 1 - basic use of endpoints
+===================================
 
-:download:`Right click here and 'save as' to download this notebook. <../notebooks/tutorial1.ipynb>`
+:download:`Right click here and 'save as' to download this notebook. <../notebooks/01_basic_endpoint_usage.ipynb>`
 
 
 .. raw:: html
-   :file: tutorial1.html
+   :file: 01_basic_endpoint_usage.html

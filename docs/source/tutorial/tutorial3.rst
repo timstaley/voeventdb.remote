@@ -1,7 +1,7 @@
-Tutorial 3
-=============
+Tutorial 3 - cone searches and `astropy.coordinates`
+=====================================================
 
-:download:`Right click here and 'save as' to download this notebook. <../notebooks/tutorial3.ipynb>`
+:download:`Right click here and 'save as' to download this notebook. <../notebooks/03_cone_search_filters_and_astropy.ipynb>`
 
 .. raw:: html
-   :file: tutorial3.html
+   :file: 03_cone_search_filters_and_astropy.html

@@ -1,7 +1,7 @@
-Tutorial 2
-=============
+Tutorial 2 - applying filters
+===============================
 
-:download:`Right click here and 'save as' to download this notebook. <../notebooks/tutorial2.ipynb>`
+:download:`Right click here and 'save as' to download this notebook. <../notebooks/02_applying_filters.ipynb>`
 
 .. raw:: html
-   :file: tutorial2.html
+   :file: 02_applying_filters.html
