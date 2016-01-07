@@ -13,5 +13,14 @@ documentation, available at http://voeventdbremote.readthedocs.org.
 If you're new, start with the 
 [introduction page](http://voeventdbremote.readthedocs.org/en/latest/intro.html).
 
+## License
+BSD 2-clause, see [COPYING.txt](COPYING.txt) for details.
+
+## Acknowledgement
+If you use voeventdb.remote (or the REST API provided at 
+http://voeventdb.4pisky.org/) for work leading to a publication then I would 
+appreciate you getting in touch so that I can arrange a suitable 
+[ASCL](http://ascl.net/) entry or other DOI for citing.
+
 [VOEvent]: http://voevent.readthedocs.org/
 [voeventdb]: https://github.com/timstaley/voeventdb
