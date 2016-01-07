@@ -28,17 +28,12 @@ voeventdb.remote is available via
 `PyPi <https://pypi.python.org/pypi/voeventdb.remote>`_, which means that
 if you are using a virtualenv_ then you should be able to simply type::
 
-    pip install --pre voeventdb.remote
+    pip install voeventdb.remote
 
 at the command line. Alternatively, you can
 `install into your user-area <https://pip.pypa.io/en/latest/user_guide/#user-installs>`_
 using::
 
-    pip install --user --pre voeventdb.remote
-
-.. note::
-
-    The ``--pre`` flag is temporary - it only applies while using the
-    'pre-release' version.
+    pip install --user voeventdb.remote
 
 .. _virtualenv: http://virtualenv.readthedocs.org/

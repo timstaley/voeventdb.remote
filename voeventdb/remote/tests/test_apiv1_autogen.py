@@ -8,13 +8,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-apiv1_funcs_dict = {k: v for k, v in vars(apiv1).items()
-                    if inspect.isfunction(v)
-                    and not k.startswith('_')}
+apiv1_epfuncs_dict = {k: v for k, v in vars(apiv1).items()
+                      if inspect.isfunction(v)
+                      and not k.startswith('_')}
 
-apiv1_queryfuncs_dict = {k:v for k,v in apiv1_funcs_dict.items()
+apiv1_queryfuncs_dict = {k:v for k,v in apiv1_epfuncs_dict.items()
                          if 'packet' not in k}
-apiv1_queryfuncs_dict.pop('citation_network_map')
 
 
 @pytest.mark.usefixtures('mock_requests')
