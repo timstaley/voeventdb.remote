@@ -34,7 +34,7 @@ class FilterKeys:
         }
 
     For definitions of the various filters, and examples of valid
-    values, see the :ref:`voeventdb query-filters <voeventdb:apiv1_filters>` page.
+    values, see the :ref:`voeventdb query-filters <voeventdbserver:apiv1_filters>` page.
 
     """
     authored_since = 'authored_since'
@@ -56,7 +56,7 @@ class OrderValues:
     """
     Enumerates valid orderings.
 
-    For details see :ref:`this section <voeventdb:ordervalues>` in
+    For details see :ref:`this section <voeventdbserver:ordervalues>` in
     the *voeventdb.server* docs.
 
     """

@@ -29,10 +29,10 @@ default_pagesize = 1000
 """
 Number of rows fetched in each HTTP GET request (when querying list-endpoints).
 
-Note that if more rows are available, multiple GET requests are
-made 'behind the scenes' when using the top-level interface,
-so this variable can typically be left unchanged
+When many rows are available, the top-level interface will make
+multiple GET requests behind the scenes, fetching `pagesize` rows
+in each GET. This variable can typically be left unchanged
 for casual usage - it's aimed at advanced usage when trying to improve
-performance with large queries.
+network performance.
 """
 

@@ -2,9 +2,8 @@ from __future__ import absolute_import
 from voeventdb.remote.apiv1.definitions import (
     Endpoints, FilterKeys, OrderValues
 )
-from voeventdb.remote.apiv1.convenience_funcs import (
+from voeventdb.remote.apiv1.endpoints import (
     map_authored_month_count,
-    citation_network_map,
     count,
     list_ivorn,
     list_ivorn_ncites,
@@ -15,4 +14,3 @@ from voeventdb.remote.apiv1.convenience_funcs import (
     packet_synopsis,
     packet_xml,
 )
-

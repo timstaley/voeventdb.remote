@@ -11,8 +11,8 @@ You can use this library to easily retrieve information
 about transient astronomical events, if that information was sent via the public
 VOEvent_ network.
 
-For a fuller introduction, see the main
-:ref:`voeventdb introduction <voeventdb:introduction>`.
+For a fuller introduction including a list of features, see the main
+:ref:`voeventdb.server docs <voeventdbserver:introduction>`.
 Alternatively, jump right in to the :ref:`tutorial <tutorial>` to learn by example.
 
 

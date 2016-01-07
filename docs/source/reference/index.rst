@@ -4,6 +4,10 @@
 API Reference
 ==============
 
+Note that all the functions in ``voeventdb.remote`` mirror the underlying
+server functionality. The :ref:`server docs <voeventdbserver:apiv1_ref>` may be
+helpful when trying to understand the underlying data-queries and filters.
+
 
 Package default variables
 --------------------------
@@ -17,6 +21,15 @@ Package default variables
 API version 1 (``apiv1``)
 -------------------------
 
+Endpoints
+~~~~~~~~~
+.. automodule:: voeventdb.remote.apiv1.endpoints
+    :members:
+    :undoc-members:
+    :member-order: bysource
+
+Enumeration classes
+~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: voeventdb.remote.apiv1.FilterKeys
     :members:
     :undoc-members:
@@ -27,14 +40,15 @@ API version 1 (``apiv1``)
     :undoc-members:
     :member-order: bysource
 
-.. automodule:: voeventdb.remote.apiv1.convenience_funcs
-    :members:
-    :undoc-members:
-    :member-order: bysource
-
-
 Helper classes
----------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. automodule:: voeventdb.remote.helpers
     :members:
+    :member-order: bysource
+
+Additional convenience functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. automodule:: voeventdb.remote.apiv1.convenience
+    :members:
+    :undoc-members:
     :member-order: bysource

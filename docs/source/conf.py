@@ -88,6 +88,8 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 
 
+# add_module_names = False
+
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -109,7 +111,7 @@ nitpicky = True
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     'https://docs.python.org/': None,
-    'voeventdb':('http://voeventdb.readthedocs.org/en/latest/', None),
+    'voeventdbserver':('http://voeventdb.readthedocs.org/en/latest/', None),
     'astropy': ('http://astropy.readthedocs.org/en/stable/', None)
 }
 

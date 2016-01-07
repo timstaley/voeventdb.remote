@@ -15,6 +15,7 @@ using the links on each tutorial page.
 .. toctree::
    :maxdepth: 2
 
+   quickstart
    tutorial1
    tutorial2
    tutorial3
