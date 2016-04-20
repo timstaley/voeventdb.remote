@@ -117,28 +117,30 @@ intersphinx_mapping = {
 
 def convert_nb(nbpath, output_folder):
     from subprocess import check_call as sh
+    # Currently using abspath as workaround for this bug:
+    # https://github.com/jupyter/nbconvert/issues/293
     basename = os.path.basename(nbpath)
+    nb_abspath = os.path.abspath(nbpath)
     basename_stem = basename.rsplit('.',1)[0]
-    # Execute the notebook
-    # sh(["jupyter", "nbconvert", "--to", "notebook",
-    #     "--execute", "--inplace", nbpath])
-
-    # Convert to .rst for Sphinx
+    html_out_path = os.path.join(output_folder, basename_stem+".html")
+    html_out_path = os.path.abspath(html_out_path)
+    # Convert to .html for Sphinx to pull in
     sh(["jupyter", "nbconvert",
         "--to", "html",
         "--execute",
         # '--template', 'basic',
         '--template', 'custom_nbconvert_template',
-        nbpath,
-        "--output", str(os.path.join(output_folder, basename_stem+".html")),
+        nb_abspath,
+        "--output", html_out_path,
         ])
 
-    # Clear notebook output
-    sh(["jupyter", "nbconvert", "--to", "notebook",
+    # Clear notebook output in case this is being run locally by a dev,
+    # preserves clean diffs.
+    sh(["jupyter-nbconvert", "--to", "notebook",
         # "--inplace",
         "--ClearOutputPreprocessor.enabled=True",
-        nbpath,
-        "--output", nbpath,
+        nb_abspath,
+        "--output", nb_abspath,
         ])
 
 import glob
