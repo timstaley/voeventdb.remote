@@ -14,7 +14,7 @@ import logging
 logger = logging.getLogger('vdbr-tests')
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def mock_requests(fixture_db_session):
     # print
     # print "setting up flask client"
@@ -57,7 +57,7 @@ def mock_requests(fixture_db_session):
     requests.get = original_get
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def reset_globals_to_defaults():
     host = vr.default_host
     list_max = vr.default_list_n_max
