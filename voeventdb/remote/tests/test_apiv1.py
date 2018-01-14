@@ -81,7 +81,7 @@ class TestFunctionCalls():
         assert s.coords
         assert len(s.coords) == 1
         skyevent = s.sky_events[0]
-        c_pkt = vp.pull_astro_coords(swift_bat_grb_655721)
+        c_pkt = vp.get_event_position(swift_bat_grb_655721)
         assert skyevent.position.ra.value == c_pkt.ra
         assert skyevent.position.dec.value == c_pkt.dec
         assert skyevent.position_error.value == c_pkt.err
