@@ -25,9 +25,6 @@ matrix:
     - python: "3.6"
       env: TOXENV=docs3
 
-virtualenv:
-  system_site_packages: true
-
 
 before_install:
     # Pre-cache long-builds before we go into tox, avoids 'no-stdout' timeouts.
@@ -41,6 +38,7 @@ before_install:
   - psql -l | cat
   - psql -c "create database $USER;" -U postgres | cat
   - pip install --upgrade pip virtualenv
+  - pip install codecov
 install:
   - cd ${TRAVIS_BUILD_DIR}
   - pip install tox
@@ -49,4 +47,12 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - tox --showconfig
   - tox -v
+after_success:
+  - tox -e coverage-report
+  - codecov
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 

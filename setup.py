@@ -23,7 +23,7 @@ extras_require = {
     'test': test_requires,
     'all': test_requires,
 }
-packages = find_packages()
+packages = find_packages(exclude=('voeventdb.remote.tests',))
 print("FOUND PACKAGES: ", packages)
 
 

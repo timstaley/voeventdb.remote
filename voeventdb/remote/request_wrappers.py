@@ -34,7 +34,7 @@ def format_conesearch_params(input):
             # Assume preformatted (ra,dec,err) json-list:
             try:
                 ra, dec, err = json.loads(input)
-            except json.JSONDecodeError as e:
+            except Exception as e:
                 logger.error('Unable to parse input "{}" as JSON'.format(input))
                 raise ValueError
             posn = SkyCoord(ra, dec, unit='deg')

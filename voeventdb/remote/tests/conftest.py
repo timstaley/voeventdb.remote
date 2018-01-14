@@ -2,12 +2,12 @@ from __future__ import print_function
 
 import logging
 
-import flask
 import pytest
 import requests
 
 import voeventdb.remote as vr
 from voeventdb.server.restapi.app import app
+# noinspection PyUnresolvedReferences
 from voeventdb.server.tests.fixtures.connection import (
     empty_db_connection,
     fixture_db_session,
