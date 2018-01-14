@@ -1,15 +1,18 @@
 from __future__ import print_function
-import pytest
+
+import logging
+
 import flask
+import pytest
+import requests
+
+import voeventdb.remote as vr
+from voeventdb.server.restapi.app import app
 from voeventdb.server.tests.fixtures.connection import (
     empty_db_connection,
     fixture_db_session,
-    simple_populated_db
+    simple_populated_db,
 )
-from voeventdb.server.restapi.app import app
-import voeventdb.remote as vr
-import requests
-import logging
 
 logger = logging.getLogger('vdbr-tests')
 

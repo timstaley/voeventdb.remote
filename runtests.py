@@ -4,6 +4,7 @@ Turns down the iso8601 logging level-
 otherwise this can be disruptive when viewing error messages.
 """
 import sys
+
 import pytest
 
 if __name__ == "__main__":

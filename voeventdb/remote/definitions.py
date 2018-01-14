@@ -13,4 +13,3 @@ class ResultKeys:
     querystring = 'querystring'
     result = 'result'
     url = 'url'
-

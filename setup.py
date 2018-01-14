@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-from setuptools import setup, find_packages
-import versioneer
 
+from setuptools import find_packages, setup
+
+import versioneer
 
 install_requires = [
     'iso8601',

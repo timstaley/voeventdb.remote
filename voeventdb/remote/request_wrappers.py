@@ -1,20 +1,16 @@
-import urllib
-import requests
-import requests.exceptions
-
-import voeventdb.remote
-from voeventdb.remote.definitions import (
-    PaginationKeys,
-    ResultKeys,
-)
-from voeventdb.remote.utils import (
-    helpful_requests_error_log,
-)
-from astropy.coordinates import SkyCoord, Angle
-from six import string_types
 import datetime
 import json
 import logging
+import urllib
+
+import requests
+import requests.exceptions
+from astropy.coordinates import Angle, SkyCoord
+from six import string_types
+
+import voeventdb.remote
+from voeventdb.remote.definitions import PaginationKeys, ResultKeys
+from voeventdb.remote.utils import helpful_requests_error_log
 
 logger = logging.getLogger(__name__)
 

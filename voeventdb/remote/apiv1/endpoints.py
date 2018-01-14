@@ -30,12 +30,16 @@ Function calls use a consistent style throughout:
 """
 # (Actually just convenient partial-bindings to request_wrappers).
 
-from voeventdb.remote.definitions import ResultKeys
-from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
-from voeventdb.remote.request_wrappers import (
-    get_summary_data, get_list_data, get_detail_response
-)
 import logging
+
+from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
+from voeventdb.remote.definitions import ResultKeys
+from voeventdb.remote.request_wrappers import (
+    get_detail_response,
+    get_list_data,
+    get_summary_data,
+)
+
 logger = logging.getLogger(__name__)
 
 

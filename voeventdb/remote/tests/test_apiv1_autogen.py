@@ -1,10 +1,12 @@
 from __future__ import print_function
-import pytest
+
 import inspect
+import logging
+
+import pytest
+
 import voeventdb.remote.apiv1 as apiv1
 from voeventdb.remote.apiv1 import FilterKeys
-
-import logging
 
 logger = logging.getLogger(__name__)
 

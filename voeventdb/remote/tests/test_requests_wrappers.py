@@ -1,16 +1,19 @@
 from __future__ import print_function
+
+import datetime
+
+import astropy.units as units
+import iso8601
 import pytest
+import requests
+from astropy.coordinates import Angle, SkyCoord
+
 import voeventdb.remote as vr
 import voeventdb.remote.request_wrappers as wrappers
-from voeventdb.remote.definitions import ResultKeys
-from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
-import requests
-from voeventdb.server.tests.fixtures.connection import simple_populated_db
 import voeventdb.server.tests.fixtures.fake as fake
-import datetime
-import iso8601
-from astropy.coordinates import SkyCoord, Angle
-import astropy.units as units
+from voeventdb.remote.apiv1.definitions import Endpoints, FilterKeys
+from voeventdb.remote.definitions import ResultKeys
+from voeventdb.server.tests.fixtures.connection import simple_populated_db
 
 
 @pytest.mark.usefixtures('mock_requests', 'simple_populated_db')

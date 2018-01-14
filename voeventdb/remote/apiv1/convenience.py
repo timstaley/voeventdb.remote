@@ -1,9 +1,10 @@
 """
 Convenience functions for exploring / extracting more complex data-structures.
 """
-from voeventdb.remote.helpers import _map_citations
-from voeventdb.remote.apiv1.endpoints import packet_synopsis, list_ivorn
 from voeventdb.remote.apiv1.definitions import FilterKeys
+from voeventdb.remote.apiv1.endpoints import list_ivorn, packet_synopsis
+from voeventdb.remote.helpers import _map_citations
+
 
 def _fetch_refs(ivorn):
     return [r['ref_ivorn'] for r in packet_synopsis(ivorn)['refs']]

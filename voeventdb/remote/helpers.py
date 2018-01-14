@@ -1,15 +1,16 @@
 """
 Helper classes for providing convenience parsing of returned JSON content.
 """
-from astropy.coordinates import SkyCoord, Angle
-from astropy.time import Time
-import iso8601
 import logging
-from copy import deepcopy
+import pprint
 from collections import defaultdict
+from copy import deepcopy
+
+import iso8601
+from astropy.coordinates import Angle, SkyCoord
+from astropy.time import Time
 
 logging.getLogger('iso8601').setLevel(logging.INFO)
-import pprint
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,8 @@
-from contextlib import contextmanager
-import requests
 import logging
+from contextlib import contextmanager
+
+import requests
+
 logger = logging.getLogger(__name__)
 
 @contextmanager
@@ -25,4 +27,3 @@ def helpful_requests_error_log():
         raise
     finally:
         pass
-

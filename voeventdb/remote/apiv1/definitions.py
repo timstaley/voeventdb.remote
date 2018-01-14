@@ -66,6 +66,3 @@ class OrderValues:
     id_desc = '-id'
     ivorn = 'ivorn'
     ivorn_desc = '-ivorn'
-
-
-

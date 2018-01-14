@@ -12,7 +12,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 from __future__ import print_function
-import sys
+
+import glob
 import os
 import subprocess
 
@@ -61,7 +62,8 @@ author = u'Tim Staley'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-from voeventdb.remote import __version__, __versiondict__
+
+from voeventdb.remote import __version__, __versiondict__ # isort:skip
 
 version = __version__.split('+')[0]
 if 'dirty' in version:
@@ -143,7 +145,6 @@ def convert_nb(nbpath, output_folder):
         "--output", nb_abspath,
         ])
 
-import glob
 notebooks = glob.glob('notebooks/*.ipynb')
 print("Notebooks found",notebooks)
 
