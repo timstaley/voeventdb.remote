@@ -1,31 +1,33 @@
+sudo: required
+
+addons:
+  postgresql: "9.5"
+  apt:
+    packages:
+    - postgresql-server-dev-9.5
+    - pandoc
+
+services:
+- postgresql
+
 language: python
 
 matrix:
   include:
     - python: "2.7"
       env: TOXENV=py27
-    - python: "2.7"
-      env: TOXENV=docs
+    - python: "3.4"
+      env: TOXENV=py34
+    - python: "3.5"
+      env: TOXENV=py35
+    - python: "3.6"
+      env: TOXENV=py36
+    - python: "3.6"
+      env: TOXENV=docs3
 
 virtualenv:
   system_site_packages: true
 
-sudo: required
-dist: trusty
-
-env:
-  global:
-    - PG_CONFIG=/usr/lib/postgresql/9.3/bin/pg_config
-
-addons:
-  postgresql: "9.3"
-  apt:
-    packages:
-    - postgresql-server-dev-9.3
-    - pandoc
-
-services:
-- postgresql
 
 before_install:
     # Pre-cache long-builds before we go into tox, avoids 'no-stdout' timeouts.
