@@ -1,0 +1,12 @@
+[run]
+branch = True
+omit=
+    voeventdb/remote/_version.py
+source=
+    voeventdb/remote
+
+[paths]
+source =
+   voeventdb/remote
+   .tox/*/lib/python*/site-packages/voeventdb/remote
+   .tox/pypy/site-packages/voeventdb/remote

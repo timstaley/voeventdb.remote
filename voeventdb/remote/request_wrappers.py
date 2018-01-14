@@ -18,8 +18,8 @@ if six.PY3:
 else:
     from urllib import quote_plus
 
-
 logger = logging.getLogger(__name__)
+
 
 def format_conesearch_params(input):
     """
@@ -27,29 +27,33 @@ def format_conesearch_params(input):
     """
     if not input:
         raise ValueError(
-            "Cannot format {} to valid cone-search params".format(input()))
+            "Cannot format {} to valid cone-search params".format(input))
 
     try:
         if isinstance(input, string_types):
             # Assume preformatted (ra,dec,err) json-list:
-            ra,dec,err = json.loads(input)
-            posn = SkyCoord(ra,dec, unit='deg')
+            try:
+                ra, dec, err = json.loads(input)
+            except json.JSONDecodeError as e:
+                logger.error('Unable to parse input "{}" as JSON'.format(input))
+                raise ValueError
+            posn = SkyCoord(ra, dec, unit='deg')
             posn_error = Angle(err, unit='deg')
-        elif len(input)==2:
+        elif len(input) == 2:
             # Assume (Skycoord, Angle) tuple:
             posn = SkyCoord(input[0])
             posn_error = Angle(input[1])
-        elif len(input)==3:
+        elif len(input) == 3:
             # Assume simple (ra,dec,err) tuple:
             # We still parse via SkyCoord, this provides validation.
-            posn = SkyCoord(input[0],input[1], unit='deg')
+            posn = SkyCoord(input[0], input[1], unit='deg')
             posn_error = Angle(input[2], unit='deg')
         else:
-            raise ValueError
+            raise TypeError
     except:
         logger.error(
-            "Cannot format {} to valid SkyCoord / Angle "
-            "for cone-search ".format(input()))
+            'Cannot parse or convert "{}" as valid SkyCoord / Angle '
+            'for cone-search '.format(input))
         raise
     return str([posn.ra.deg, posn.dec.deg, posn_error.deg])
 
@@ -63,14 +67,15 @@ def format_filters(filters):
     if not filters:
         return filters
     formatted = {}
-    for k,v in filters.items():
+    for k, v in filters.items():
         if isinstance(v, datetime.datetime):
             formatted[k] = v.isoformat()
         else:
-            formatted[k]=v
+            formatted[k] = v
     if 'cone' in filters:
         formatted['cone'] = format_conesearch_params(filters['cone'])
     return formatted
+
 
 def get_summary_response(endpoint,
                          filters,
@@ -107,6 +112,7 @@ def get_detail_response(endpoint,
     r.raise_for_status()
     return r
 
+
 def get_paginated(url, params, n_to_fetch, pagesize):
     offset = 0
     results = []
@@ -128,6 +134,7 @@ def get_paginated(url, params, n_to_fetch, pagesize):
     results = results[:n_to_fetch]
     return results
 
+
 def get_list_data(list_endpoint,
                   count_endpoint,
                   filters=None,
@@ -145,8 +152,8 @@ def get_list_data(list_endpoint,
         params.update(format_filters(filters))
 
     n_matched = get_summary_data(endpoint=count_endpoint,
-                                filters=filters,
-                                host=host)
+                                 filters=filters,
+                                 host=host)
     if n_max is None:
         n_max = voeventdb.remote.default_list_n_max
     if n_max:

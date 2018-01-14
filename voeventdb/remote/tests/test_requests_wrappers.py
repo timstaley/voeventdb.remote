@@ -94,6 +94,18 @@ class TestConeParamParsing():
         # print(rv.text)
         assert rv.status_code == 200
 
+    def test_bad_arg(self):
+        with pytest.raises(TypeError):
+            wrappers.format_conesearch_params()
+        with pytest.raises(ValueError):
+            wrappers.format_conesearch_params(None)
+        with pytest.raises(ValueError):
+            wrappers.format_conesearch_params("foobar")
+        with pytest.raises(TypeError):
+            wrappers.format_conesearch_params(42)
+        with pytest.raises(TypeError):
+            wrappers.format_conesearch_params((1,2,3,4))
+
     def test_valid_string_passthrough(self):
         assert (wrappers.format_conesearch_params(self.cone_string) ==
                 self.cone_string)

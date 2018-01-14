@@ -15,13 +15,14 @@ using the links on each tutorial page.
 .. toctree::
    :maxdepth: 2
 
-   quickstart
-   tutorial1
-   tutorial2
-   tutorial3
-   tutorial4
-   tutorial5
-   demo
+   ../notebooks/00_quickstart
+   ../notebooks/01_basic_endpoint_usage
+   ../notebooks/02_applying_filters
+   ../notebooks/03_cone_search_filters_and_astropy
+   ../notebooks/04_citation_networks
+   ../notebooks/05_ordering_results
+   ../notebooks/06_demo_applications
+
 
 
 .. note:: Optional dependencies:

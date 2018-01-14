@@ -16,6 +16,7 @@ from __future__ import print_function
 import glob
 import os
 import subprocess
+import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
@@ -31,20 +32,39 @@ sys.path.append(rootdir)
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon'
-]
+
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.intersphinx',
+              'sphinx.ext.viewcode',
+              'sphinx.ext.napoleon',
+              'nbsphinx',
+              'IPython.sphinxext.ipython_console_highlighting',
+              ]
+
+RUNNING_UNDER_TOX_CI = os.environ.get('TOX_DOCS', False)
+
+nbsphinx_execute = 'always'
+nbsphinx_execute = 'never'
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
+
+if RUNNING_UNDER_TOX_CI=="TRUE":
+    suppress_warnings = ['ref.doc']
+    print("Suppressing some sphinx warnings cf"
+          "https://github.com/spatialaudio/nbsphinx/issues/130")
+else:
+    print(
+        "\n**************************************************************\n"
+        "ACHTUNG!\n"
+        "You may need to disable the 'error on warning flag' to build "
+          "docs locally, "
+          "cf https://github.com/spatialaudio/nbsphinx/issues/130\n"
+        "(See Makefile:SPHINXOPTS)"
+        "\n**************************************************************\n")
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-# The suffix(es) of source filenames.
-# You can specify multiple suffix as a list of string:
-# source_suffix = ['.rst', '.md']
+
 source_suffix = '.rst'
 
 # The encoding of source files.
@@ -77,7 +97,6 @@ release = __versiondict__['full-revisionid'][:8]
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
 language = None
-
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -116,38 +135,3 @@ intersphinx_mapping = {
     'voeventdbserver':('http://voeventdb.readthedocs.org/en/latest/', None),
     'astropy': ('http://astropy.readthedocs.org/en/stable/', None)
 }
-
-def convert_nb(nbpath, output_folder):
-    from subprocess import check_call as sh
-    # Currently using abspath as workaround for this bug:
-    # https://github.com/jupyter/nbconvert/issues/293
-    basename = os.path.basename(nbpath)
-    nb_abspath = os.path.abspath(nbpath)
-    basename_stem = basename.rsplit('.',1)[0]
-    html_out_path = os.path.join(output_folder, basename_stem+".html")
-    html_out_path = os.path.abspath(html_out_path)
-    # Convert to .html for Sphinx to pull in
-    sh(["jupyter", "nbconvert",
-        "--to", "html",
-        "--execute",
-        # '--template', 'basic',
-        '--template', 'custom_nbconvert_template',
-        nb_abspath,
-        "--output", html_out_path,
-        ])
-
-    # Clear notebook output in case this is being run locally by a dev,
-    # preserves clean diffs.
-    sh(["jupyter-nbconvert", "--to", "notebook",
-        # "--inplace",
-        "--ClearOutputPreprocessor.enabled=True",
-        nb_abspath,
-        "--output", nb_abspath,
-        ])
-
-notebooks = glob.glob('notebooks/*.ipynb')
-print("Notebooks found",notebooks)
-
-if not os.environ.get("SKIPNB",None):
-    for nb in notebooks:
-        convert_nb(nb, output_folder='tutorial')
