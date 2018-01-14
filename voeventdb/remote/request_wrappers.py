@@ -5,12 +5,19 @@ import urllib
 
 import requests
 import requests.exceptions
+import six
 from astropy.coordinates import Angle, SkyCoord
 from six import string_types
 
 import voeventdb.remote
 from voeventdb.remote.definitions import PaginationKeys, ResultKeys
 from voeventdb.remote.utils import helpful_requests_error_log
+
+if six.PY3:
+    from urllib.parse import quote_plus
+else:
+    from urllib import quote_plus
+
 
 logger = logging.getLogger(__name__)
 
@@ -94,7 +101,7 @@ def get_detail_response(endpoint,
     if host is None:
         host = voeventdb.remote.default_host
     ep_url = host + endpoint
-    url = ep_url + urllib.quote_plus(ivorn)
+    url = ep_url + quote_plus(ivorn)
     with helpful_requests_error_log():
         r = requests.get(url)
     r.raise_for_status()

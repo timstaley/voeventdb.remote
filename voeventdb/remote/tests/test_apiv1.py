@@ -4,12 +4,12 @@ import logging
 
 import pytest
 import requests
+import voeventparse as vp
 
 import voeventdb.remote as vr
 import voeventdb.remote.apiv1 as apiv1
 import voeventdb.remote.apiv1.definitions
 import voeventdb.server.restapi.inspection_utils as iu
-import voeventparse as vp
 from voeventdb.remote.helpers import Synopsis
 from voeventdb.server.restapi.v1.definitions import _list_class_vars
 from voeventdb.server.tests.resources import swift_bat_grb_655721
