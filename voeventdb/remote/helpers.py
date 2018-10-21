@@ -66,14 +66,14 @@ class Synopsis(object):
         author_datetime (:class:`datetime.datetime`): The ``Who.Date`` timestamp.
             (Parsed to datetime, UTC timezone). May be ``None`` if no timestamp
             present in the VOEvent packet.
-        author_ivorn (string): The ``Who.AuthorIVORN`` entry. May be
+        author_ivorn (str): The ``Who.AuthorIVORN`` entry. May be
             None if no entry present in the VOEvent packet.
-        ivorn (string)
+        ivorn (str)
         received (:class:`datetime.datetime`): Dates exactly when the packet
             was loaded into this instance of voeventdb.
-        role (string)
-        stream (string)
-        version (string)
+        role (str)
+        stream (str)
+        version (str)
         sky_events (list): A list of :class:`SkyEvent` objects.
             These are parsed from the `WhereWhen` section of a VOEvent
             packet, if possible. (If the packet has no WhereWhen data,
