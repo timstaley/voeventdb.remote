@@ -36,3 +36,6 @@ for casual usage - it's aimed at advanced usage when trying to improve
 network performance.
 """
 
+
+from . import _version
+__version__ = _version.get_versions()['version']
